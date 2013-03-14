@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<!--
+  Google HTML5 slide template
+
+  Authors: Luke Mahé (code)
+           Marcin Wichary (code and design)
+
+           Dominic Mazzoni (browser compatibility)
+           Charles Chen (ChromeVox support)
+
+  URL: http://code.google.com/p/html5slides/
+-->
+
+<html>
+  <head>
+    <title>Hacking Day</title>
+
+    <meta charset='utf-8'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../styles.css">
+    <script src='../slides.js'></script>
+  </head>
+
+  <style>
+    /* Your individual styles here, or just use inline styles if that’s
+       what you want. */
+
+
+  </style>
+
+  <body style='display: none'>
+
+    <section class='slides layout-regular template-default'>
+
+      <!-- Your slides (<article>s) go here. Delete or comment out the
+           slides below. -->
+      <article class='biglogo'>
+
+      </article>
+      <article>
+        <h1>
+          Firefox OS
+        </h1>
+        <p>
+          Disfruta Firefox OS, crea tu propia aplicación!
+        </p>
+      </article>
+
+      <article>
+        <h3>
+          Building Blocks
+        </h3>
+        <ul> <!--class="build"-->
+          <li>Componentes en HTML + CSS para manetener consistencia visual</li>
+          <li>Accesibilidad - Utilizan roles aria</li>
+          <li>Aceleran el desarrollo de la app</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>
+          Componentes dispoibles
+        </h3>
+        <ul style="float: left; width: 50%">
+          <li>Barras de progreso y actividad</li>
+          <li>Acciones de menu</li>
+          <li>Barras de estado</li>
+          <li>Botones</li>
+          <li>Listas</li>
+          <li>Pestañas</li>
+          <li>Entradas de texto</li>
+          <li>Selector de valores</li>
+          <li>Barras de herramientas</li>
+          <li>Y muchísimo más....</li>
+        </ul>
+        <img style="float: right; margin-top: -450px; border-radius: 10px" src="images/switches.jpg"></img>
+      </article>
+
+      <article>
+        <h3>
+          ¿Dónde puedo profundizar más?
+        </h3>
+        <ul>
+          <li>Building blocks: <a href="http://www.buildingfirefoxos.com">http://www.buildingfirefoxos.com</a></li>
+          <li>Firefox OS Boilerplate App: <a href="https://github.com/robnyman/Firefox-OS-Boilerplate-App">repositorio en Github</a></li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>
+          Hacking, hacking!!!
+        </h3>
+        <ul>
+          <li>A partir de aquí, como el movimiento se demuestra andando, vamos a desarrollar un juego para Firefox OS!!</li>
+          <li>Un sencillo puzzle que podrá tomar fotos de la cámara o de la galería del dispositivo</li>
+          <li>Usaremos canvas, transformaciones de traslación, escalado, etc...</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>
+          Lo primero: ¿Qué es el app manifiest?
+        </h3>
+        <ul>
+          <li>Es el mecanismo por el cual una Open Web App define la información que el browser necesita para interactuar con ella</li>
+          <li>Nombre, descripción, permisos, actividades implementadas, ...</li>
+          <li>Más info aquí <a href="https://developer.mozilla.org/en-US/docs/Apps/Manifest">https://developer.mozilla.org/en-US/docs/Apps/Manifest</a></li>
+        </ul>
+      </article>
+
+      <article class='smaller'>
+        <h3>
+          Manifiesto para nuestro juego
+        </h3>
+        <section>
+          <pre>
+{
+  "name": "Puzzle",
+  "description": "Puzzle Game",
+  "type": "certified",
+  "permissions": {
+    "settings":{ "access": "readonly" }
+  },
+  "launch_path": "/index.html",
+  "developer": {
+    "name": "Cristian Rodríguez de la Cruz"
+  },
+  "locales": {
+    "en-US": { "name": "Puzzle", "description": "Puzzle Game" }
+  },
+  "default_locale": "en-US",
+  "icons": {
+    "60": "/style/icons/puzzle.png"
+  },
+  "orientation": "portrait-primary"
+}</pre>
+        </section>
+      </article>
+
+      <article>
+        <h3>
+          ¿En qué nos puede ayudar Firefox OS?
+        </h3>
+        <ul>
+          <li>API para recibir imágenes de la galería o de la cámara fotográfica</li>
+          <li>Soporte para multi-idioma</li>
+        </ul>
+      </article>
+
+      <article class='smaller'>
+        <h3>
+          Actividad "pick" de tipo "image/jpeg"
+        </h3>
+        <section>
+          <pre>
+var activity = new MozActivity({
+  name: 'pick',
+  data: {
+    type: 'image/jpeg',
+    width: window.innerWidth - (2 * Game.rows),
+    height: window.innerHeight - OFFSET_TOP - (2 * Game.rows)
+  }
+});
+
+activity.onsuccess = function success() {
+  Game.start(URL.createObjectURL(this.result.blob), function done() {
+    gameView.dataset.pagePosition = 'viewport';
+  });
+};
+
+activity.onerror = function error() {
+  window.console.error('Error picking a picture: ', activity.error);
+};</pre>
+        </section>
+      </article>
+
+      <article class='smaller'>
+        <h3>
+          Multi-idioma (recursos & definición)
+        </h3>
+        <section>
+          <pre>
+&lt;!-- Localization --&gt;
+&lt;link rel="resource" type="application/l10n" href="locales/locales.ini"&gt;
+&lt;script type="application/javascript" src="js/l10n.js"&gt;&lt;/script&gt;</pre>
+<p><a href="https://github.com/mozilla-b2g/gaia/blob/master/shared/js">https://github.com/mozilla-b2g/gaia/blob/master/shared/js</a></p>
+          <pre>
+@import url(puzzle.en-US.properties)
+[es]
+@import url(puzzle.es.properties)
+[fr]
+@import url(puzzle.fr.properties)</pre>
+
+          <pre>
+game-title = Puzzle Game
+difficulty-msg = The difficulty is {{difficulty}}</pre>
+
+          <pre>
+game-title = El juego del Puzzle
+difficulty-msg = La dificultad es {{difficulty}}</pre>
+        </section>
+      </article>
+
+      <article>
+        <h3>
+          Multi-idioma (API)
+        </h3>
+        <section>
+          <ul>
+            <li>HTML</li>
+          </ul>
+          <pre>
+&lt;h1 data-l10n-id="game-title"&gt;Puzzle Game&lt;/h1&gt;</pre>
+          <ul>
+            <li>Javascript</li>
+          </ul>
+          <pre>
+var _ = navigator.mozL10n.get;
+var message = _('difficulty-msg', { difficulty: 7 });</pre>
+
+          <pre>
+navigator.mozL10n.ready(function localize() {
+  // La UI ha sido traducida
+});</pre>
+        </section>
+      </article>
+
+      <article>
+        <h3>
+          Código fuente del juego
+        </h3>
+
+        <ul>
+          <li><a href="https://github.com/crdlc/puzzle">https://github.com/crdlc/puzzle</a></li>
+        </ul>
+        <p style="text-align: center">
+        <img style="width: 280px" src="images/game_2.png"></img>
+        <img style="width: 280px; margin-left: 40px" src="images/game_1.png"></img>
+        </p>
+      </article>
+
+      <article class='biglogo2'>
+
+      </article>
+    </section>
+
+  </body>
+</html>
