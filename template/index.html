@@ -144,6 +144,7 @@
         </h3>
         <ul>
           <li>API para recibir imágenes de la galería o de la cámara fotográfica</li>
+          <li>Quiero que el movil vibre cuando una pieza sea colocada correctamente</li>
           <li>Soporte para multi-idioma</li>
         </ul>
       </article>
@@ -172,6 +173,26 @@ activity.onsuccess = function success() {
 activity.onerror = function error() {
   window.console.error('Error picking a picture: ', activity.error);
 };</pre>
+        </section>
+      </article>
+
+      <article class='smaller'>
+        <h3>
+          Vibration API
+        </h3>
+        <section>
+          <pre>
+var vibrate = (function vibrateWrapper() {
+  return 'vibrate' in navigator ? function(t) { navigator.vibrate(t) } :
+                                  function()  { /* simulator */ };
+})();
+
+if (sourceTile.dataset.position === targetIndex.toString()) {
+  vibrate([100]);
+  // 100ms. E.g. [200, 100, 200] -> This vibrates the device for 200ms, then
+  // pauses for 100ms before vibrating the device again for another 200ms
+}</pre>
+          <p><a href="https://developer.mozilla.org/en/docs/DOM/window.navigator.vibrate">https://developer.mozilla.org/en/docs/DOM/window.navigator.vibrate</a></p>
         </section>
       </article>
 
