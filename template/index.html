@@ -49,51 +49,11 @@
 
       <article>
         <h3>
-          Building Blocks
-        </h3>
-        <ul> <!--class="build"-->
-          <li>Componentes en HTML + CSS para manetener consistencia visual</li>
-          <li>Accesibilidad - Utilizan roles aria</li>
-          <li>Aceleran el desarrollo de la app</li>
-        </ul>
-      </article>
-
-      <article>
-        <h3>
-          Componentes dispoibles
-        </h3>
-        <ul style="float: left; width: 50%">
-          <li>Barras de progreso y actividad</li>
-          <li>Acciones de menu</li>
-          <li>Barras de estado</li>
-          <li>Botones</li>
-          <li>Listas</li>
-          <li>Pestañas</li>
-          <li>Entradas de texto</li>
-          <li>Selector de valores</li>
-          <li>Barras de herramientas</li>
-          <li>Y muchísimo más....</li>
-        </ul>
-        <img style="float: right; margin-top: -450px; border-radius: 10px" src="images/switches.jpg"></img>
-      </article>
-
-      <article>
-        <h3>
-          ¿Dónde puedo profundizar más?
-        </h3>
-        <ul>
-          <li>Building blocks: <a href="http://www.buildingfirefoxos.com">http://www.buildingfirefoxos.com</a></li>
-          <li>Firefox OS Boilerplate App: <a href="https://github.com/robnyman/Firefox-OS-Boilerplate-App">repositorio en Github</a></li>
-        </ul>
-      </article>
-
-      <article>
-        <h3>
           Hacking, hacking!!!
         </h3>
         <ul>
           <li>A partir de aquí, como el movimiento se demuestra andando, vamos a desarrollar un juego para Firefox OS!!</li>
-          <li>Un sencillo puzzle que podrá tomar fotos de la cámara o de la galería del dispositivo</li>
+          <li>Un sencillo puzzle que tomará fotos de la cámara o de la galería del dispositivo</li>
           <li>Usaremos canvas, transformaciones de traslación, escalado, etc...</li>
         </ul>
       </article>
@@ -249,6 +209,171 @@ navigator.mozL10n.ready(function localize() {
 
       <article>
         <h3>
+          Quiero una app nativa... Building Blocks
+        </h3>
+        <ul> <!--class="build"-->
+          <li>Componentes en HTML + CSS para manetener consistencia visual</li>
+          <li>Accesibilidad - Utilizan roles aria</li>
+          <li>Aceleran el desarrollo de la app</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>
+          Componentes dispoibles
+        </h3>
+        <ul style="float: left; width: 50%">
+          <li>Barras de progreso y actividad</li>
+          <li>Acciones de menu</li>
+          <li>Barras de estado</li>
+          <li>Botones</li>
+          <li>Listas</li>
+          <li>Pestañas</li>
+          <li>Entradas de texto</li>
+          <li>Selector de valores</li>
+          <li>Barras de herramientas</li>
+          <li>Y muchísimo más....</li>
+        </ul>
+        <img style="float: right; margin-top: -450px; border-radius: 10px" src="images/switches.jpg"></img>
+      </article>
+
+      <article>
+        <h3>
+          Profundizando más
+        </h3>
+        <ul>
+          <li>Building blocks: <a href="http://www.buildingfirefoxos.com">http://www.buildingfirefoxos.com</a></li>
+          <li>Firefox OS Boilerplate App: <a href="https://github.com/robnyman/Firefox-OS-Boilerplate-App">repositorio en Github</a></li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>
+          ¿Qué BBs vamos a usar en nuestro juego?
+        </h3>
+        <ul>
+          <li>Cabeceras</li>
+          <li>Botones</li>
+          <li>Listas</li>
+          <li>Selectores</li>
+        </ul>
+      </article>
+
+      <article class='smaller'>
+        <h3>
+          BB - Cabeceras
+        </h3>
+        <pre>&lt;link rel="stylesheet" type="text/css" href="style/headers.css"&gt;</pre>
+        <pre>&lt;header&gt;
+  &lt;menu type="toolbar"&gt;
+    &lt;a href="#" id="settings-open"&gt;
+      &lt;span class="icon icon-settings" data-l10n-id="settings"&gt;
+        Settings
+      &lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/menu&gt;
+  &lt;h1 data-l10n-id="game-title">Puzzle Game&lt;/h1&gt;
+&lt;/header&gt;</pre>
+
+      <pre>section[role="region"] > header .icon.icon-settings {
+  background-image: url(images/settings.png);
+}</pre>
+      <p style="text-align: center">
+          <img src="images/header.png"></img>
+        </p>
+      </article>
+
+      <article class='smaller'>
+        <h3>
+          BB - Botones
+        </h3>
+        <pre>&lt;link rel="stylesheet" type="text/css" href="style/buttons.css"&gt;</pre>
+        <pre>&lt;button id="play-button" data-l10n-id="game-start"&gt;Start New Puzzle!&lt;/button&gt;</pre>
+        <pre>#play-button {
+  margin-top: 15rem;
+  border-width: .2rem;
+  height: 6rem;
+  font: 500 2.6rem/6rem 'MozTT', Sans-serif;
+  width: auto;
+  border-radius: .5rem;
+  text-shadow: .1rem .1rem 0 rgba(0,0,0,0.3);
+  box-shadow: .2rem .2rem 0 rgba(0,0,0,0.3);
+}</pre>
+        <p style="text-align: center">
+          <img src="images/button.png"></img>
+        </p>
+      </article>
+
+      <article class='smaller'>
+        <h3>
+          BB - Listas y switches
+        </h3>
+        <pre>&lt;link rel="stylesheet" type="text/css" href="style/list.css"&gt;
+&lt;link rel="stylesheet" type="text/css" href="style/switches.css"&gt;</pre>
+        <pre>&lt;header&gt;
+  &lt;h2 data-l10n-id="level">Difficulty level&lt;/h2&gt;
+&lt;/header&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;label&gt;
+      &lt;input type="radio" name="level" value="2" /&gt;
+      &lt;span>&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;a data-l10n-id="level-beginner">Beginner&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;label&gt;
+      &lt;input type="radio" name="level" value="3" /&gt;
+      &lt;span>&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;a data-l10n-id="level-intermediate">Intermediate&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</pre>
+      </article>
+
+      <article class='smaller'>
+        <h3>
+          BB - Listas y switches II
+        </h3>
+        <pre>ul {
+  margin: 0; padding: 0;
+  overflow: hidden; list-style: none;
+}
+
+ul li {
+  position: relative; border-bottom: 0.1rem solid #e6e6e3;
+ -moz-box-sizing: border-box; min-height: 6rem; color: #000;
+}
+
+ul li > a {
+  display: block; text-decoration: none;
+  outline: 0; color: #000;
+  -moz-box-sizing: border-box; height: 6rem;
+  font-size: 2.1rem; line-height: 6rem; padding: 0 3rem;
+}
+
+ul li > label:not([for]) {
+  top: 0; left: 0; position: absolute;
+  width: 100%; height: 100%;
+}
+
+ul li > label:not([for]) > span {
+  left: auto; right: 3rem;
+}</pre>
+      </article>
+
+      <article>
+        <h3>
+          BB - Listas y switches III
+        </h3>
+
+        <p style="text-align: center">
+          <img style="width: 320px" src="images/lists.png"></img>
+        </p>
+      </article>
+
+      <article>
+        <h3>
           Código fuente del juego
         </h3>
 
@@ -256,8 +381,8 @@ navigator.mozL10n.ready(function localize() {
           <li><a href="https://github.com/crdlc/puzzle">https://github.com/crdlc/puzzle</a></li>
         </ul>
         <p style="text-align: center">
-        <img style="width: 280px" src="images/game_2.png"></img>
-        <img style="width: 280px; margin-left: 40px" src="images/game_1.png"></img>
+        <img style="width: 280px" src="images/game 1.png"></img>
+        <img style="width: 280px; margin-left: 40px" src="images/game 2.png"></img>
         </p>
       </article>
 
