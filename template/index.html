@@ -55,30 +55,44 @@
           <li>A partir de aquí, como el movimiento se demuestra andando, vamos a desarrollar un juego para Firefox OS!!</li>
           <li>Un sencillo puzzle que tomará fotos de la cámara o de la galería del dispositivo</li>
           <li>Usaremos canvas, transformaciones de traslación, escalado, etc...</li>
+          <li>Aunque antes necesitamos un poco más de contexto...</li>
         </ul>
       </article>
 
       <article>
         <h3>
-          Lo primero: ¿Qué es el app manifiest?
+          Web Apps hosteadas
         </h3>
         <ul>
-          <li>Es la información que describe la Open Web App y que el browser necesita para interactuar con ella</li>
-          <li>Nombre, descripción, permisos, actividades implementadas, ...</li>
-          <li>Más info aquí <a href="https://developer.mozilla.org/en-US/docs/Apps/Manifest">https://developer.mozilla.org/en-US/docs/Apps/Manifest</a></li>
+          <li>Una website más un manifiesto</li>
+          <li>Una aplicación por origen</li>
+          <li>Los privilegios son muy similares a cualquier contenido web</li>
+          <li>Los recursos pueden ser cacheado (appcache)</li>
+          <li>Mayor parte de APIs nativas via Web Activities</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>
+          Web Apps empaquetadas
+        </h3>
+        <ul>
+          <li>Recursos en un paquete zip</li>
+          <li>Aplicaciones verificadas por un app store</li>
+          <li>Apps serán aprovadas despues de una revisión de código o algun proceso equivalente de seguridad</li>
+          <li>Nuevo protocolo app:// (app://tid.es !== http://tid.es)</li>
         </ul>
       </article>
 
       <article class='smaller'>
         <h3>
-          Manifiesto para nuestro juego
+          El manifiesto de nuestro juego
         </h3>
         <section>
           <pre>
 {
   "name": "Puzzle",
   "description": "Puzzle Game",
-  "type": "certified",
   "permissions": {
     "settings":{ "access": "readonly" }
   },
@@ -95,12 +109,110 @@
   },
   "orientation": "portrait-primary"
 }</pre>
+        <p><a href="https://developer.mozilla.org/en-US/docs/Apps/Manifest">App manifest en MDN</a></p>
+        <p><a href="https://marketplace.firefox.com/developers/validator">Validador</a></p>
         </section>
       </article>
 
       <article>
         <h3>
-          ¿En qué nos puede ayudar Firefox OS?
+          Instalando app hosteada
+        </h3>
+        <pre>var installApp = navigator.mozApps.install(manifestURL);
+
+// Successful install
+installApp.onsuccess = function(data) {
+  console.log("Success, app installed!");
+};
+
+// Install failed
+installApp.onerror = function() {
+  console.log("Install failed\n\n:" + installApp.error.name);
+};</pre>
+      </article>
+
+      <article>
+        <h3>
+          Instalando app empaquetada
+        </h3>
+        <ul>
+          <li>Paso 1: empaquetar en un zip todo el contenido incluyendo el manifiesto</li>
+          <li>Paso 2: crear un mini manifiesto</li>
+        </ul>
+        <pre>{
+  "name": "Puzzle Game",
+  "package_path" : "http://www.tid.es/puzzleGame.zip",
+  "version": "1",
+  "developer": {
+    "name": "Cristian Rodríguez de la Cruz"
+  }
+}</pre>
+        <pre>var installApp = navigator.mozApps.installPackage(miniManifestURL);</pre>
+      </article>
+
+      <article>
+        <h3>
+          Permisos
+        </h3>
+        <ul>
+          <li>Tipos de contenido: web, instaladas, privilegiadas y certificadas</li>
+          <li>Tipo de permisos: implícito y explícito</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>
+          Tipos de aplicaciones
+        </h3>
+        <ul>
+          <li><strong style="color: orange">Contenido Web</strong></li>
+          <li>Web Apps <strong style="color: orange">Instaladas</strong>: contenido web instalado pero no verificado</li>
+          <li>Web Apps <strong style="color: orange">Empaquetadas</strong>:
+            <ul>
+              <li><strong style="color: orange">Privilegiadas:</strong> contenido web estático revisado e instaladado por un trusted app store</li>
+              <li><strong style="color: orange">Certificadas:</strong> contenido web estático instalado por el vendor y OEM</li>
+            </ul>
+          </li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>
+          ¿Qué permisos para que aplicaciones?
+        </h3>
+        <ul>
+          <li><strong style="color: orange">Web</strong>: Geolocation, Fullscreen</li>
+          <li><strong style="color: orange">Instaladas</strong>: Sensor API, Alarm API, FM Radio</li>
+          <li><strong style="color: orange">Privilegiadas</strong>: Camera API, Alarm API, TCP Socket, Contacts API, Device Storage API, Browser API, WiFi Information API</li>
+          <li><strong style="color: orange">Certificadas</strong>: Background services, WebSMS, WebTelephony, WebBluetooth, MobileConnection API, PowerManagementAPI, Push Notifications API, Settings API, Permissions API</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>
+          Implicito VS Explícito
+        </h3>
+        <ul>
+          <li><strong style="color: orange">Explícito</strong>: El usuario debe garantizar el permiso. Declarado en manifiesto pero garantizado en ejecución (Geolication, Contacts, ...)</li>
+          <li><strong style="color: orange">Implícito</strong>: Permiso garantizado por su naturaleza. Revisado por el app store</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>
+          Resumen
+        </h3>
+        <ul>
+          <li>Los permisos se deben declarar en el manifiesto</li>
+          <li>Permisos explícitos serán denegados o garantizados por el usuario</li>
+          <li>Sólo para aplicaciones privilegiadas la elección del usuario será almacenada por defecto</li>
+          <li><a href="https://wiki.mozilla.org/Apps/Security">Más sobre seguridad</a></li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>
+          ¿Qué necesitamos para nuestro juego por parte de FOS ?
         </h3>
         <ul>
           <li>API para recibir imágenes de la galería o de la cámara fotográfica</li>
