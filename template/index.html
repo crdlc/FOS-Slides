@@ -57,6 +57,9 @@
           <li>Usaremos canvas, transformaciones de traslación, escalado, etc...</li>
           <li>Aunque antes necesitamos un poco más de contexto...</li>
         </ul>
+        <p style="text-align: center">
+          <img src="images/icon.png"></img>
+        </p>
       </article>
 
       <article>
@@ -363,12 +366,13 @@ navigator.mozL10n.ready(function localize() {
         <h3>
           ¿Qué BBs vamos a usar en nuestro juego?
         </h3>
-        <ul>
+        <ul style="float: left; width: 50%">
           <li>Cabeceras</li>
           <li>Botones</li>
           <li>Listas</li>
           <li>Selectores</li>
         </ul>
+        <img style="float: right; margin-top: 20px" src="images/puzzle 1.png"></img>
       </article>
 
       <article class='smaller'>
@@ -402,14 +406,16 @@ navigator.mozL10n.ready(function localize() {
         <pre>&lt;link rel="stylesheet" type="text/css" href="style/buttons.css"&gt;</pre>
         <pre>&lt;button id="play-button" data-l10n-id="game-start"&gt;Start New Puzzle!&lt;/button&gt;</pre>
         <pre>#play-button {
+  border: .2rem solid #ccc9c9;
+  box-shadow: 0 .3rem .4rem rgba(0,0,0,.49);
+  background-image: linear-gradient(bottom, #cbcbcb 0%, #fbfbfb 100%);
+  color: #333;
   margin-top: 15rem;
-  border-width: .2rem;
   height: 6rem;
   font: 500 2.6rem/6rem 'MozTT', Sans-serif;
   width: auto;
   border-radius: .5rem;
   text-shadow: .1rem .1rem 0 rgba(0,0,0,0.3);
-  box-shadow: .2rem .2rem 0 rgba(0,0,0,0.3);
 }</pre>
         <p style="text-align: center">
           <img src="images/button.png"></img>
