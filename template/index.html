@@ -63,6 +63,15 @@
       </article>
 
       <article>
+        <h1>
+          Tipos de aplicación según su formato
+        </h1>
+        <p>
+          Hosteadas vs Empaquetadas
+        </p>
+      </article>
+
+      <article>
         <h3>
           Web Apps hosteadas
         </h3>
@@ -154,18 +163,17 @@ installApp.onerror = function() {
       </article>
 
       <article>
-        <h3>
-          Permisos
-        </h3>
-        <ul>
-          <li>Tipos de contenido: web, instaladas, privilegiadas y certificadas</li>
-          <li>Tipo de permisos: implícito y explícito</li>
-        </ul>
+        <h1>
+          Tipos de aplicación desde el punto de vista de la instalación
+        </h1>
+        <p>
+          Web, instaladas, privilegiadas y certificadas
+        </p>
       </article>
 
       <article>
         <h3>
-          Tipos de aplicaciones
+          ¿Quién es quien?
         </h3>
         <ul>
           <li><strong style="color: orange">Contenido Web</strong></li>
@@ -181,46 +189,43 @@ installApp.onerror = function() {
 
       <article>
         <h3>
+          Tipo de permisos: "Implicito vs Explícito"
+        </h3>
+        <ul>
+          <li><strong style="color: orange">Explícito</strong>: El usuario debe garantizar el permiso. Declarado en manifiesto pero garantizado en ejecución (Geolication, Contacts, ...)</li>
+          <li><strong style="color: orange">Implícito</strong>: Permiso garantizado por su naturaleza. Revisado por el app store</li>
+        </ul>
+        <h3>
           ¿Qué permisos para que aplicaciones?
         </h3>
         <ul>
           <li><strong style="color: orange">Web</strong>: Geolocation, Fullscreen</li>
           <li><strong style="color: orange">Instaladas</strong>: Sensor API, Alarm API, FM Radio</li>
           <li><strong style="color: orange">Privilegiadas</strong>: Camera API, Alarm API, TCP Socket, Contacts API, Device Storage API, Browser API, WiFi Information API</li>
-          <li><strong style="color: orange">Certificadas</strong>: Background services, WebSMS, WebTelephony, WebBluetooth, MobileConnection API, PowerManagementAPI, Push Notifications API, Settings API, Permissions API</li>
+          <li><strong style="color: orange">Certificadas</strong>: Background services, WebSMS, WebTelephony, WebBluetooth, MobileConnection API, PowerManagement API, Push Notifications API, Settings API, Permissions</li>
         </ul>
       </article>
 
       <article>
         <h3>
-          Implicito VS Explícito
+          Resumiendo...
         </h3>
         <ul>
-          <li><strong style="color: orange">Explícito</strong>: El usuario debe garantizar el permiso. Declarado en manifiesto pero garantizado en ejecución (Geolication, Contacts, ...)</li>
-          <li><strong style="color: orange">Implícito</strong>: Permiso garantizado por su naturaleza. Revisado por el app store</li>
-        </ul>
-      </article>
-
-      <article>
-        <h3>
-          Resumen
-        </h3>
-        <ul>
-          <li>Los permisos se deben declarar en el manifiesto</li>
-          <li>Permisos explícitos serán denegados o garantizados por el usuario</li>
+          <li>Los permisos deben ser enumerados en el manifiesto</li>
+          <li>Permisos explícitos serán garantizados o denegados por el usuario</li>
           <li>Sólo para aplicaciones privilegiadas la elección del usuario será almacenada por defecto</li>
           <li><a href="https://wiki.mozilla.org/Apps/Security">Más sobre seguridad</a></li>
         </ul>
       </article>
 
       <article>
-        <h3>
-          ¿Qué necesitamos para nuestro juego por parte de FOS ?
-        </h3>
+        <h1>
+          Nuesto puzzle dentro de FOS
+        </h1>
         <ul>
-          <li>API para recibir imágenes de la galería o de la cámara fotográfica</li>
-          <li>Quiero que el movil vibre cuando una pieza sea colocada correctamente</li>
-          <li>Soporte para multi-idioma</li>
+          <p>Web Acticities: "pick"</p>
+          <p>APIs nativas: Vibración</p>
+          <p>Librerías: Multi-idioma</p>
         </ul>
       </article>
 
@@ -323,13 +328,13 @@ navigator.mozL10n.ready(function localize() {
       </article>
 
       <article>
-        <h3>
+        <h1>
           Quiero una app nativa... Building Blocks
-        </h3>
+        </h1>
         <ul> <!--class="build"-->
-          <li>Componentes en HTML + CSS para manetener consistencia visual</li>
-          <li>Accesibilidad - Utilizan roles aria</li>
-          <li>Aceleran el desarrollo de la app</li>
+          <p>Componentes en HTML + CSS para manetener consistencia visual</p>
+          <p>Accesibilidad - Utilizan roles aria</p>
+          <p>Aceleran el desarrollo de la app</p>
         </ul>
       </article>
 
